@@ -6,7 +6,7 @@ const userRegistration = async (req, res) => {
     try {
         const { username, password } = req.body;
         const isUserExist = await UserSchema.findOne({ username })
-
+        console.log(username, password)
         if (isUserExist) {
             return res.status(400).json({ message: "User Exists, please Login" })
         }
@@ -17,6 +17,7 @@ const userRegistration = async (req, res) => {
 
         res.status(201).json({ message: "User registered successfully, redirecitng to Login Page." })
     } catch (error) {
+        console.log("register error: ", error)
         res.status(500).json({ message: "Unable to register user, please try again later" })
     }
 }

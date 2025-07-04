@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require("express")
+const cors = require("cors")
 const app = express()
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -10,11 +11,12 @@ const userRoutes = require("./routes/authRoute")
 const taskRoutes = require("./routes/taskRoute")
 connectToDb()
 
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer);
 io.on("connection", (socket) => {
     console.log("server is up and running")
 });
 
+app.use(cors())
 app.use(express.json())
 app.use((req, res, next) => {
     req.io = io;
@@ -28,4 +30,4 @@ app.get("/", (req, res) => {
     res.json({ message: "Server is Up and Running" })
 })
 
-httpServer.listen(3000);
+httpServer.listen(8080);

@@ -7,6 +7,7 @@ const createTask = async (req, res) => {
         const task = new TaskSchema({ title, description, assignedUser, status, priority })
         await task.save()
 
+        req.io.emit("task:created", task)
         res.status(201).json({ message: "Task created successfully!" })
     } catch (error) {
         console.log("task creation: ", error)
@@ -14,4 +15,14 @@ const createTask = async (req, res) => {
     }
 }
 
-module.exports = { createTask }
+const getTask = async (req, res) => {
+    try {
+        const todos = await TaskSchema.find().populate("assignedUser")
+
+        res.status(200).json({ message: "Todos fetched successfully", data: todos })
+    } catch (error) {
+        console.log("getting todo error: ", error)
+    }
+}
+
+module.exports = { createTask, getTask }
