@@ -43,4 +43,15 @@ const userLogin = async (req, res) => {
         res.status(500).json({ message: "Login failed, please try again later" });
     }
 };
-module.exports = { userRegistration, userLogin }
+
+const getUserList = (async (req, res) => {
+    try {
+        const userDetails = await UserSchema.find().select('-password')
+        res.status(200).json({ message: "User list fetched successfully", userList: userDetails })
+    } catch (error) {
+        console.log("Unable to fetch user list", error);
+        res.status(500).json({ message: "Unable to fetch user list" })
+    }
+})
+
+module.exports = { userRegistration, userLogin, getUserList }
