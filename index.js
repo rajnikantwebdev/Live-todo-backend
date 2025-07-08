@@ -8,6 +8,8 @@ const cors = require("cors")
 const { connectToDb } = require("./connectDb")
 const userRoutes = require("./routes/authRoute")
 const taskRoutes = require("./routes/taskRoute")
+const logsRoute = require("./routes/logsRoute")
+
 connectToDb()
 
 const io = new Server(httpServer, {
@@ -19,7 +21,9 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
     console.log("server is up and running")
 });
+
 app.use(cors())
+app.use(express.static('public'))
 app.use(express.json())
 app.use((req, res, next) => {
     req.io = io;
@@ -28,6 +32,7 @@ app.use((req, res, next) => {
 
 app.use("/api/user", userRoutes)
 app.use("/api/task", taskRoutes)
+app.use("/api", logsRoute)
 
 app.get("/", (req, res) => {
     res.json({ message: "Server is Up and Running" })

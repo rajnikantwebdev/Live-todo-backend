@@ -1,9 +1,12 @@
 const express = require("express")
 const router = express.Router()
-const { createTask, getTask, updateTask } = require("../controllers/taskController")
+const { createTask, getTask, updateTask, deleteTask, reAssignTask } = require("../controllers/taskController")
+const { verifyAccessToken } = require("../middleware/authMiddleware")
 
-router.post("/add", createTask)
+router.post("/add", verifyAccessToken, createTask)
 router.get("/get", getTask)
-router.put("/update/:id", updateTask)
+router.put("/update/:id", verifyAccessToken, updateTask)
+router.delete("/delete/:id", verifyAccessToken, deleteTask)
+router.put("/re-assign/:id", verifyAccessToken, reAssignTask)
 
 module.exports = router

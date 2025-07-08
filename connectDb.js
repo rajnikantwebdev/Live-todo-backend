@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const TaskSchema = require("./model/Task")
 
 const connectToDb = async () => {
     try {

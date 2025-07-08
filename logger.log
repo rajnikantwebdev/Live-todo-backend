@@ -1,0 +1,10 @@
+{"level":"info","timestamp":"Jul-07-2025 19:00:45","data":{"action":"re-assign","actor":{"username":"rajnistudent"},"task":{"title":"Coding","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-07-2025 20:26:53","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement Logger functionality","status":"todo"}}}
+{"level":"info","timestamp":"Jul-07-2025 20:27:00","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement Logger functionality","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-07-2025 21:44:38","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"Implement smart assign","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-07-2025 21:45:24","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement smart assign","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-07-2025 21:47:34","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"Implement conflict handling","status":"done"}}}
+{"level":"info","timestamp":"Jul-07-2025 21:47:57","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement conflict handling","status":"done"}}}
+{"level":"info","timestamp":"Jul-07-2025 22:24:40","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"Implement conflict handling","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:25:42","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Design landing page","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:25:45","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Design landing page","status":"inProgress"}}}

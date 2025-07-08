@@ -54,4 +54,27 @@ const getUserList = (async (req, res) => {
     }
 })
 
-module.exports = { userRegistration, userLogin, getUserList }
+const getUserTasksList = (async (req, res) => {
+    try {
+        const userTaskList = await UserSchema.aggregate([
+            {
+                $project: {
+                    username: 1,
+                    currentTasksCount: { $size: "$currentTasks" },
+                },
+            },
+            {
+                $sort: { currentTasksCount: 1 }
+            },
+            {
+                $limit: 1
+            }
+        ]);
+        res.status(200).json({ message: "Task list", data: userTaskList[0]._id })
+    } catch (error) {
+        console.log("error while fetching user task list ", error)
+        res.status(500).json({ message: "Task list failed" })
+    }
+})
+
+module.exports = { userRegistration, userLogin, getUserList, getUserTasksList }
