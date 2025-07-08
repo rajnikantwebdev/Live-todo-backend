@@ -30,3 +30,38 @@
 {"level":"info","timestamp":"Jul-08-2025 08:51:45","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Update footer links","status":"todo"}}}
 {"level":"info","timestamp":"Jul-08-2025 09:00:16","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"done"}}}
 {"level":"info","timestamp":"Jul-08-2025 09:00:18","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 09:18:09","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement JWT auth updated","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:34:00","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement JWT auth","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:36:47","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement JWT auth","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:37:09","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement JWT auth updated","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:39:39","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs updated","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:40:46","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:41:33","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs updated","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:47:24","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:50:47","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement JWT auth updated","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:51:06","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement JWT auth","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:54:29","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement JWT auth","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:54:40","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"Implement JWT auth","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 10:55:36","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"Conflict handling","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:09:19","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"Testing task","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:09:34","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Testing task","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:09:49","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Add task filters","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:10:14","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Add task filters","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:10:25","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement smart assign","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:10:34","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Testing task","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:10:56","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:12:15","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:12:18","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:12:20","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:12:22","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:12:24","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:12:27","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:16:39","data":{"action":"dragged and dropped","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:19:23","data":{"action":"dragged and dropped","actor":{"username":"bala"},"task":{"title":"Update footer links","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:32:57","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"optimize image loading","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:35:16","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"optimize image loading","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:36:07","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"optimize image loading","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:36:12","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"optimize image loading","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:38:52","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:38:54","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:38:57","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}

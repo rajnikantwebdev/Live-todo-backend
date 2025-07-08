@@ -1,9 +1,20 @@
 const TaskSchema = require("../model/Task")
 const { httpLogger } = require("../logger")
+const dayjs = require("dayjs")
 
 const createTask = async (req, res) => {
     try {
         const { title, description, assignedUser, status, priority } = req.body
+        const existingTask = await TaskSchema.find({ status: status }).select("title")
+
+        const isDuplicate = existingTask.some(task =>
+            title.trim().toLowerCase() === task.title.trim().toLowerCase()
+        );
+
+        if (isDuplicate) {
+            return res.status(400).json({ message: "Task titles must be unique within a board" });
+        }
+
         const task = new TaskSchema({ title, description, assignedUser, status, priority })
         const savedTask = await task.save()
         const populatedTask = await TaskSchema.findById(savedTask._id).populate("assignedUser", "-password");
@@ -19,6 +30,23 @@ const createTask = async (req, res) => {
                 status: populatedTask.status,
             },
         });
+
+        if (req.io) {
+            req.io.emit("log:update", {
+                level: "info",
+                timestamp: dayjs().format("MMM-DD-YYYY HH:mm:ss"),
+                data: {
+                    action: "create",
+                    actor: {
+                        username: req.user.username,
+                    },
+                    task: {
+                        title: populatedTask.title,
+                        status: populatedTask.status,
+                    },
+                }
+            });
+        }
 
         res.status(201).json({ message: "Task created successfully!", task: "populatedTask" });
     } catch (error) {
@@ -41,7 +69,18 @@ const getTask = async (req, res) => {
 const updateTask = async (req, res) => {
     try {
         const { id } = req.params
-        const { title, description, assignedUser, status, priority } = req.body;
+        const { title, description, assignedUser, status, priority, dnd } = req.body;
+        const existingTask = await TaskSchema.find({ status: status }).select("title")
+
+        const isDuplicate = existingTask.some(task =>
+            title.trim().toLowerCase() === task.title.trim().toLowerCase()
+        );
+
+        if (isDuplicate) {
+            return res.status(400).json({ message: "Task titles must be unique within a board" });
+        }
+
+
         const oldTask = await TaskSchema.findById(id);
 
         if (!oldTask) return res.status(404).json({ message: "Task not found" });
@@ -54,7 +93,7 @@ const updateTask = async (req, res) => {
         ).populate("assignedUser", "-password")
 
         httpLogger.log("info", {
-            action: "edit",
+            action: `${dnd}` ? "dragged and dropped" : "edit",
             actor: {
                 username: req.user.username,
             },
@@ -65,6 +104,24 @@ const updateTask = async (req, res) => {
         });
 
         req.io.emit("task:updated", { updatedTask, oldStatus })
+
+        if (req.io) {
+            req.io.emit("log:update", {
+                level: "info",
+                timestamp: dayjs().format("MMM-DD-YYYY HH:mm:ss"),
+                data: {
+                    action: `${dnd}` ? "dragged and dropped" : "edit",
+                    actor: {
+                        username: req.user.username,
+                    },
+                    task: {
+                        title: updatedTask.title,
+                        status: updatedTask.status,
+                    },
+                }
+            });
+        }
+
         res.status(200).json({ message: "Task updated successfully", data: updatedTask })
     } catch (error) {
         console.log("Error in updating the task, ", error)
@@ -78,6 +135,7 @@ const deleteTask = (async (req, res) => {
         const { id } = req.params;
         const response = await TaskSchema.findByIdAndDelete(id).select("_id title status")
         res.status(200).json({ message: "Task deleted successfully", data: response })
+
         httpLogger.log("info", {
             action: "delete",
             actor: {
@@ -88,6 +146,24 @@ const deleteTask = (async (req, res) => {
                 status: response.status,
             },
         });
+
+        if (req.io) {
+            req.io.emit("log:update", {
+                level: "info",
+                timestamp: dayjs().format("MMM-DD-YYYY HH:mm:ss"),
+                data: {
+                    action: "delete",
+                    actor: {
+                        username: req.user.username,
+                    },
+                    task: {
+                        title: response.title,
+                        status: response.status,
+                    },
+                }
+            });
+        }
+
         req.io.emit("task:deleted", { taskStatus: response.status, taskId: response._id })
     } catch (error) {
         console.log("Unable to delete, pleae try again later", error)
@@ -112,6 +188,23 @@ const reAssignTask = (async (req, res) => {
                 status: response.status,
             },
         });
+
+        if (req.io) {
+            req.io.emit("log:update", {
+                level: "info",
+                timestamp: dayjs().format("MMM-DD-YYYY HH:mm:ss"),
+                data: {
+                    action: "re-assign",
+                    actor: {
+                        username: req.user.username,
+                    },
+                    task: {
+                        title: response.title,
+                        status: response.status,
+                    },
+                }
+            });
+        }
 
         req.io.emit("task:re-assigned", { taskStatus: response.status, taskId: response._id, assignedUser: response.assignedUser })
         res.status(200).json({ message: "Task re-assigned successfully", data: response })

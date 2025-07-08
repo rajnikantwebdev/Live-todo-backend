@@ -3,7 +3,7 @@ const path = require("path");
 
 async function readLogs(req, res) {
     try {
-        const filePath = path.join(__dirname, "..", "public", "logger.log");
+        const filePath = path.join(__dirname, "..", "logger.log");
         const raw = await fs.readFile(filePath, "utf-8");
 
         const logs = raw
