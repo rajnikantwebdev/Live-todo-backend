@@ -19,3 +19,14 @@
 {"level":"info","timestamp":"Jul-08-2025 07:54:31","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Add task filters","status":"inProgress"}}}
 {"level":"info","timestamp":"Jul-08-2025 07:54:34","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Add task filters","status":"inProgress"}}}
 {"level":"info","timestamp":"Jul-08-2025 08:06:16","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:36:05","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs Updated","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:36:33","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:36:41","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:36:46","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:37:44","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"Fix login bug Updated","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:37:51","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"Design landing page","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:41:19","data":{"action":"edit","actor":{"username":"bala"},"task":{"title":"Implement smart assign","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:51:40","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:51:45","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Update footer links","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 09:00:16","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 09:00:18","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"done"}}}
