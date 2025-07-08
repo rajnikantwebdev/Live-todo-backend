@@ -14,7 +14,7 @@ connectToDb()
 
 const io = new Server(httpServer, {
     cors: {
-        origin: "http://localhost:5173"
+        origin: ["http://localhost:5173", "https://live-todo-frontend.vercel.app"]
     }
 });
 
