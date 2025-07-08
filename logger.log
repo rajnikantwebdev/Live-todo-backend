@@ -8,3 +8,14 @@
 {"level":"info","timestamp":"Jul-07-2025 22:24:40","data":{"action":"delete","actor":{"username":"bala"},"task":{"title":"Implement conflict handling","status":"done"}}}
 {"level":"info","timestamp":"Jul-08-2025 07:25:42","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Design landing page","status":"inProgress"}}}
 {"level":"info","timestamp":"Jul-08-2025 07:25:45","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Design landing page","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:47:52","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:48:00","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Write API docs","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:53:21","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Fix login bug","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:53:24","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement JWT auth","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:53:26","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Setup database schema","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:53:34","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Update footer links","status":"todo"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:53:38","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Migrate to Next.js","status":"done"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:53:56","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement smart assign","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:54:31","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Add task filters","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 07:54:34","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Add task filters","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 08:06:16","data":{"action":"create","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
