@@ -41,17 +41,8 @@ const getTask = async (req, res) => {
 const updateTask = async (req, res) => {
     try {
         const { id } = req.params
-        const { title, description, assignedUser, status, priority, lastTimeUpdate } = req.body;
+        const { title, description, assignedUser, status, priority } = req.body;
         const oldTask = await TaskSchema.findById(id);
-
-        if (new Date(lastTimeUpdate) < new Date(oldTask.updatedAt)) {
-            console.log("here")
-            return res.status(409).json({
-                message: "Conflit detected",
-                current: oldTask,
-                incoming: req.body
-            })
-        }
 
         if (!oldTask) return res.status(404).json({ message: "Task not found" });
         const oldStatus = oldTask.status;
