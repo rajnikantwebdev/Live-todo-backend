@@ -1,6 +1,7 @@
 const TaskSchema = require("../model/Task")
 const { httpLogger } = require("../logger")
 const dayjs = require("dayjs")
+const UserSchema = require("../model/User")
 
 const createTask = async (req, res) => {
     try {
@@ -17,6 +18,12 @@ const createTask = async (req, res) => {
 
         const task = new TaskSchema({ title, description, assignedUser, status, priority })
         const savedTask = await task.save()
+
+        await UserSchema.findByIdAndUpdate(
+            assignedUser,
+            { $addToSet: { currentTasks: savedTask._id } }
+        );
+
         const populatedTask = await TaskSchema.findById(savedTask._id).populate("assignedUser", "-password");
         req.io.emit("task:created", populatedTask)
 
@@ -70,27 +77,34 @@ const updateTask = async (req, res) => {
     try {
         const { id } = req.params
         const { title, description, assignedUser, status, priority, dnd } = req.body;
-        const existingTask = await TaskSchema.find({ status: status }).select("title")
 
-        const isDuplicate = existingTask.some(task =>
-            title.trim().toLowerCase() === task.title.trim().toLowerCase()
-        );
-
-        if (isDuplicate) {
-            return res.status(400).json({ message: "Task titles must be unique within a board" });
-        }
 
 
         const oldTask = await TaskSchema.findById(id);
 
         if (!oldTask) return res.status(404).json({ message: "Task not found" });
         const oldStatus = oldTask.status;
+        const oldAssignedUser = oldTask.assignedUser?.toString();
+        console.log("old: ", oldAssignedUser)
 
         const updatedTask = await TaskSchema.findByIdAndUpdate(
             id,
             { title, description, assignedUser, status, priority },
             { new: true }
         ).populate("assignedUser", "-password")
+
+
+        if (assignedUser && assignedUser !== oldAssignedUser) {
+            if (oldAssignedUser) {
+                await UserSchema.findByIdAndUpdate(oldAssignedUser, {
+                    $pull: { currentTasks: id }
+                })
+            }
+
+            await UserSchema.findByIdAndUpdate(assignedUser, {
+                $addToSet: { currentTasks: id },
+            });
+        }
 
         httpLogger.log("info", {
             action: `${dnd}` ? "dragged and dropped" : "edit",
@@ -133,8 +147,19 @@ const updateTask = async (req, res) => {
 const deleteTask = (async (req, res) => {
     try {
         const { id } = req.params;
-        const response = await TaskSchema.findByIdAndDelete(id).select("_id title status")
-        res.status(200).json({ message: "Task deleted successfully", data: response })
+        const taskToDelete = await TaskSchema.findById(id).select("_id title status assignedUser");
+
+        if (!taskToDelete) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        await TaskSchema.findByIdAndDelete(id);
+
+        if (taskToDelete.assignedUser) {
+            await UserSchema.findByIdAndUpdate(taskToDelete.assignedUser, {
+                $pull: { currentTasks: id },
+            });
+        }
 
         httpLogger.log("info", {
             action: "delete",
@@ -142,8 +167,8 @@ const deleteTask = (async (req, res) => {
                 username: req.user.username,
             },
             task: {
-                title: response.title,
-                status: response.status,
+                title: taskToDelete.title,
+                status: taskToDelete.status,
             },
         });
 
@@ -157,26 +182,57 @@ const deleteTask = (async (req, res) => {
                         username: req.user.username,
                     },
                     task: {
-                        title: response.title,
-                        status: response.status,
+                        title: taskToDelete.title,
+                        status: taskToDelete.status,
                     },
-                }
+                },
             });
         }
 
-        req.io.emit("task:deleted", { taskStatus: response.status, taskId: response._id })
+        req.io.emit("task:deleted", {
+            taskStatus: taskToDelete.status,
+            taskId: taskToDelete._id,
+        });
+
+        res.status(200).json({ message: "Task deleted successfully", data: taskToDelete });
     } catch (error) {
         console.log("Unable to delete, pleae try again later", error)
         res.status(500).json({ message: "Unable to delete, please try again later" })
     }
 })
 
-const reAssignTask = (async (req, res) => {
+const reAssignTask = async (req, res) => {
     try {
-        const { id } = req.params
-        const { assignedUser } = req.body
-        console.log("assignedUser ", id, assignedUser)
-        const response = await TaskSchema.findByIdAndUpdate(id, { assignedUser }, { new: true }).populate("assignedUser", "-password").select("_id title status assignedUser")
+        const { id } = req.params;
+        const { assignedUser } = req.body;
+
+        const oldTask = await TaskSchema.findById(id).select("assignedUser title status");
+
+        if (!oldTask) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        const oldAssignedUser = oldTask.assignedUser?.toString();
+
+        const updatedTask = await TaskSchema.findByIdAndUpdate(
+            id,
+            { assignedUser },
+            { new: true }
+        )
+            .populate("assignedUser", "-password")
+            .select("_id title status assignedUser");
+
+        if (oldAssignedUser && oldAssignedUser !== assignedUser) {
+            await UserSchema.findByIdAndUpdate(oldAssignedUser, {
+                $pull: { currentTasks: id },
+            });
+        }
+
+        if (assignedUser && assignedUser !== oldAssignedUser) {
+            await UserSchema.findByIdAndUpdate(assignedUser, {
+                $addToSet: { currentTasks: id },
+            });
+        }
 
         httpLogger.log("info", {
             action: "re-assign",
@@ -184,8 +240,8 @@ const reAssignTask = (async (req, res) => {
                 username: req.user.username,
             },
             task: {
-                title: response.title,
-                status: response.status,
+                title: updatedTask.title,
+                status: updatedTask.status,
             },
         });
 
@@ -199,20 +255,28 @@ const reAssignTask = (async (req, res) => {
                         username: req.user.username,
                     },
                     task: {
-                        title: response.title,
-                        status: response.status,
+                        title: updatedTask.title,
+                        status: updatedTask.status,
                     },
-                }
+                },
+            });
+
+            req.io.emit("task:re-assigned", {
+                taskStatus: updatedTask.status,
+                taskId: updatedTask._id,
+                assignedUser: updatedTask.assignedUser,
             });
         }
 
-        req.io.emit("task:re-assigned", { taskStatus: response.status, taskId: response._id, assignedUser: response.assignedUser })
-        res.status(200).json({ message: "Task re-assigned successfully", data: response })
-
+        res.status(200).json({
+            message: "Task re-assigned successfully",
+            data: updatedTask,
+        });
     } catch (error) {
-        console.log("Unable to delete, pleae try again later", error)
-        res.status(500).json({ message: "Unable to re-assign, please try again later" })
+        console.log("Unable to re-assign, please try again later", error);
+        res.status(500).json({ message: "Unable to re-assign, please try again later" });
     }
-})
+};
+
 
 module.exports = { createTask, getTask, updateTask, deleteTask, reAssignTask }
