@@ -65,7 +65,7 @@ const updateTask = async (req, res) => {
         });
 
         req.io.emit("task:updated", { updatedTask, oldStatus })
-        res.status(204).json({ message: "Task updated successfully", data: updatedTask })
+        res.status(200).json({ message: "Task updated successfully", data: updatedTask })
     } catch (error) {
         console.log("Error in updating the task, ", error)
         res.status(500).json({ message: "Unable to Edit Task, please try again later." })
