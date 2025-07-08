@@ -65,3 +65,4 @@
 {"level":"info","timestamp":"Jul-08-2025 11:38:52","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
 {"level":"info","timestamp":"Jul-08-2025 11:38:54","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
 {"level":"info","timestamp":"Jul-08-2025 11:38:57","data":{"action":"re-assign","actor":{"username":"bala"},"task":{"title":"Implement Styling","status":"inProgress"}}}
+{"level":"info","timestamp":"Jul-08-2025 11:47:22","data":{"action":"dragged and dropped","actor":{"username":"rajnikant"},"task":{"title":"Setup database schema updated","status":"inProgress"}}}
